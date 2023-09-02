@@ -15,6 +15,7 @@ mongoose.connect('mongodb://localhost:27017/taskplanner', { useNewUrlParser: tru
 app.use(express.json());
 
 app.use('/', userRoutes);
+
 app.use('/api/tasks', taskRoutes);
 
 app.listen(PORT, () => {

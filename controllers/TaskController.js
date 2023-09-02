@@ -65,12 +65,33 @@ export const deleteTask = async (req, res) => {
     }
 };
 
-const TaskController = {
+// Delete all tasks
+export const deleteAllTasks = async (req, res) => {
+    console.log("deleteAllTasks or deleteCompletedTasks called");
+    try {
+        await TaskModel.deleteMany({});
+        res.status(204).json();
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete all tasks' });
+    }
+};
+
+// Delete completed tasks
+export const deleteCompletedTasks = async (req, res) => {
+    try {
+        await TaskModel.deleteMany({ completed: true });
+        res.status(204).json();
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete completed tasks' });
+    }
+};
+
+export default  {
     createTask,
     getAllTasks,
     getTaskById,
     updateTask,
     deleteTask,
+    deleteAllTasks,
+    deleteCompletedTasks
 };
-
-export default TaskController;
